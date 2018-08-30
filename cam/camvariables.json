@@ -236,12 +236,12 @@
     "type": "string",
     "options": [
       {
-        "value": "2.1.0.3",
-        "label": "2.1.0.3"
+        "value": "2.1.0.2",
+        "label": "2.1.0.2"
       },
       {
-          "value": "2.1.0.3-ee",
-          "label": "2.1.0.3-ee"
+          "value": "2.1.0.2-ee",
+          "label": "2.1.0.2-ee"
       }
     ],
     "group_name": "icp_parameters"
