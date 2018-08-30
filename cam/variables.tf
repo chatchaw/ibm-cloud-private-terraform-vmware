@@ -12,6 +12,7 @@
 
 variable datacenter {
   description = "vCenter Datacenter"
+  default     = "sg-icc"
 }
 
 variable datastore {
@@ -22,6 +23,7 @@ variable datastore {
 
 variable resource_pool {
   description = "vCenter Cluster/Resource pool"
+  default     = "icp-cluster/Resource pool"
 }
 
 variable network {
@@ -68,7 +70,7 @@ variable vm_domain {
 
 variable timezone {
   description = "Time Zone"
-  default     = "Asia/Singapore"
+  default     = "Asia/Bangkok"
 }
 
 variable dns_list {
@@ -83,29 +85,29 @@ variable vm_types {
 }
 
 variable vm_private_key_file {
-  default = "vmware-key"
+  default = "icp-key"
 }
 
 ##### ICP Instance details ######
 variable "icp_version" {
   description = "ICP Version"
-  default     = "2.1.0.2"
+  default     = "2.1.0.2-ee"
 }
 
 variable icp_source_server {
-  default = ""
+  default = "192.168.64.152"
 }
 
 variable icp_source_user {
-  default = ""
+  default = "user"
 }
 
 variable icp_source_password {
-  default = ""
+  default = "passw0rd"
 }
 
 variable icp_source_path {
-  default = ""
+  default = "/exports/icp_binaries/2102/ibm-cloud-private-x86_64-2.1.0.2.tar.gz"
 }
 
 variable "icpadmin_password" {
@@ -122,7 +124,7 @@ variable "cluster_ip_range" {
 }
 
 variable "cluster_vip" {
-  default = ""
+  default = "192.168.64.209"
 }
 
 variable "cluster_vip_iface" {
@@ -165,7 +167,7 @@ variable "master" {
   type = "map"
 
   default = {
-    nodes         = "1"
+    nodes         = "3"
     name          = "master"
     cpu_cores     = "8"
     kubelet_lv    = "10"
@@ -174,7 +176,7 @@ variable "master" {
     registry_lv   = "20"
     management_lv = "20"
     memory        = "8192"
-    ipaddresses   = "192.168.1.81"
+    ipaddresses   = "192.168.64.201 192.168.64.202 192.168.64.203"
     netmask       = "24"
     gateway       = "192.168.1.1"
   }
@@ -190,7 +192,7 @@ variable "proxy" {
     kubelet_lv  = "10"
     docker_lv   = "40"
     memory      = "4096"
-    ipaddresses = "192.168.1.84"
+    ipaddresses = "192.168.64.204"
     netmask     = "24"
     gateway     = "192.168.1.1"
   }
@@ -207,7 +209,7 @@ variable "management" {
     docker_lv     = "40"
     management_lv = "50"
     memory        = "8192"
-    ipaddresses   = "192.168.1.87"
+    ipaddresses   = "192.168.64.205"
     netmask       = "24"
     gateway       = "192.168.1.1"
   }
@@ -217,7 +219,7 @@ variable "va" {
   type = "map"
 
   default = {
-    nodes         = "1"
+    nodes         = "0"
     name          = "va"
     cpu_cores     = "8"
     kubelet_lv    = "10"
@@ -234,13 +236,13 @@ variable "worker" {
   type = "map"
 
   default = {
-    nodes       = "3"
+    nodes       = "2"
     name        = "worker"
     cpu_cores   = "8"
     kubelet_lv  = "10"
     docker_lv   = "70"
     memory      = "8192"
-    ipaddresses = "192.168.1.90,192.168.1.91,192.168.1.92"
+    ipaddresses = "192.168.64.206 192.168.64.207"
     netmask     = "24"
     gateway     = "192.168.1.1"
   }
@@ -250,12 +252,12 @@ variable "gluster" {
   type = "map"
 
   default = {
-    nodes       = "0"
+    nodes       = "1"
     name        = "gluster"
     cpu_cores   = "2"
     data_disk   = "100"                                    // GB
     memory      = "2048"
-    ipaddresses = "192.168.1.95,192.168.1.96,192.168.1.97"
+    ipaddresses = "192.168.64.208"
     netmask     = "24"
     gateway     = "192.168.1.1"
   }
