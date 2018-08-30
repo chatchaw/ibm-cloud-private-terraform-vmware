@@ -1,14 +1,45 @@
-[
+{
+  "input_datatypes": [],
+  "output_datatype": "content_template_output",
+  "input_groups": [
+    {
+      "name": "cloud",
+      "label": "vSphere Resources"
+    },
+    {
+      "name": "ssh_keys",
+      "label": "SSH Keys"
+    },
+    {
+      "name": "image_parameters",
+      "label": "Image Parameters"
+    },
+    {
+      "name": "icp_parameters",
+      "label": "ICP Parameters"
+    },
+    {
+      "name": "icp_installer",
+      "label": "ICP-ee Installer (Optional)"
+    }
+  ],
+  "output_groups": [
+    {
+      "name": "content_template_output",
+      "label": "Outputs"
+    }
+  ],
+"template_input_params": [
   {
     "name": "datacenter",
     "label": "Data Center",
     "description": "VMware Data Center",
-    "default": "sg-icc",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "cloud"
   },  
   {
     "name": "datastore",
@@ -18,18 +49,20 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "list"
+    "type": "list",
+    "group_name": "cloud"
   },
   {
     "name": "resource_pool",
     "label": "Resource Pool",
     "description": "Use <clustername>/Resources for default resource pool in a Cluster",
-    "default": "icp-cluster/Resources",
+    "default": "Cluster01/Resources",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "cloud"
   },  
   {
     "name": "network",
@@ -40,7 +73,8 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "cloud"
   },  
   {
     "name": "osfamily",
@@ -61,7 +95,8 @@
           "value": "redhat",
           "label": "Redhat"
       }
-    ]
+    ],
+    "group_name": "cloud"
   },  
   {
     "name": "template",
@@ -72,7 +107,8 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "map"
+    "type": "map",
+    "group_name": "cloud"
   },  
   {
     "name": "ssh_user",
@@ -83,7 +119,8 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "ssh_keys"
   },
   {
     "name": "ssh_password",
@@ -93,18 +130,20 @@
     "immutable": false,
     "required": true,
     "secured": true,
-    "type": "string"
+    "type": "string",
+    "group_name": "ssh_keys"
   },
   {
     "name": "vm_private_key_file",
     "label": "VM Private Key Filename",
     "description": "VM Private Key filename to be saved on local",
-    "default": "kicp-key",
+    "default": "vmware-key",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": true,
-    "type": "string"
+    "type": "string",
+    "group_name": "ssh_keys"
   },  
   {
     "name": "vm_domain",
@@ -115,18 +154,20 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "image_parameters"
   },
   {
     "name": "timezone",
     "label": "Time Zone",
     "description": "Time Zone",
-    "default": "Asia/Bangkok",
+    "default": "Asia/Singapore",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "image_parameters"
   },
   {
     "name": "dns_list",
@@ -136,50 +177,30 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "list"
-  },
-  {
-    "name": "icp_version",
-    "label": "ICP Version",
-    "description": "ICP Version",
-    "default": "2.1.0.2-ee",
-    "hidden": false,
-    "immutable": false,
-    "required": true,
-    "secured": false,
-    "type": "string",
-    "options": [
-      {
-        "value": "2.1.0.2",
-        "label": "2.1.0.2"
-      },
-      {
-          "value": "2.1.0.2-ee",
-          "label": "2.1.0.2-ee"
-      }
-    ]
+    "type": "list",
+    "group_name": "image_parameters"
   },
   {
     "name": "icp_source_server",
     "label": "ICP Source Server",
     "description": "Installer Source Server",
-    "default": "192.168.64.152",
     "hidden": false,
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_installer"
   },
   {
     "name": "icp_source_user",
     "label": "ICP Source Username",
     "description": "Installer Source Username",
-    "default": "user",
     "hidden": false,
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_installer"
   },
   {
     "name": "icp_source_password",
@@ -189,51 +210,63 @@
     "immutable": false,
     "required": false,
     "secured": true,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_installer"
   },
   {
     "name": "icp_source_path",
     "label": "ICP Source Path",
     "description": "Installer Source Path",
-    "default": "/exports/icp_binaries/2102/ibm-cloud-private-x86_64-2.1.0.2.tar.gz",
     "hidden": false,
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_installer"
+  },
+  {
+    "name": "icp_version",
+    "label": "ICP Version",
+    "description": "ICP Version",
+    "default": "2.1.0.3",
+    "hidden": false,
+    "immutable": false,
+    "required": true,
+    "secured": false,
+    "type": "string",
+    "options": [
+      {
+        "value": "2.1.0.3",
+        "label": "2.1.0.3"
+      },
+      {
+          "value": "2.1.0.3-ee",
+          "label": "2.1.0.3-ee"
+      }
+    ],
+    "group_name": "icp_parameters"
   },
   {
     "name": "icpadmin_password",
     "label": "ICP admin password",
     "description": "Password for ICP admin",
-    "default": "mypassword",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": true,
-    "type": "string"
-  },
-  {
-    "name": "instance_prefix",
-    "label": "Hostname Prefix",
-    "description": "Type prefix to hostname",
-    "default": "kicp",
-    "hidden": false,
-    "immutable": false,
-    "required": true,
-    "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "cluster_vip",
     "label": "Cluster Virtual IP",
     "description": "Cluster Virtual IP",
-    "default": "192.168.64.209",
     "hidden": false,
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "cluster_vip_iface",
@@ -244,7 +277,8 @@
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "proxy_vip",
@@ -254,7 +288,8 @@
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },  
   {
     "name": "proxy_vip_iface",
@@ -265,7 +300,8 @@
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "cluster_name",
@@ -276,7 +312,8 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "install_gluster",
@@ -287,7 +324,8 @@
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "boolean"
+    "type": "boolean",
+    "group_name": "icp_parameters"
   },   
   {
     "name": "gluster_volume_type",
@@ -298,84 +336,139 @@
     "immutable": false,
     "required": false,
     "secured": false,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },
   {
     "name": "heketi_admin_pwd",
     "label": "Heketi Admin Password",
     "description": "Heketi Admin Password",
-    "default": "mypassword",
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": true,
-    "type": "string"
+    "type": "string",
+    "group_name": "icp_parameters"
   },       
   {
-    "name": "master",
-    "label": "Master Node",
-    "description": "Master Node Informations",
-    "default": {"nodes": "3", "name": "master", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"50","etcd_lv":"4","registry_lv":"35","management_lv":"100","memory":"8192","ipaddresses":"192.168.64.201 192.168.64.202 192.168.64.203","netmask":"21","gateway":"192.168.64.1" },
+    "name": "disable_management",
+    "label": "Disable Management",
+    "description": "Disable Management Service",
+    "default": ["istio", "custom-metrics-adapter"],
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "map"
+    "type": "list",
+    "group_name": "icp_parameters"
+  },    
+  {
+    "name": "kibana_install",
+    "label": "Install Kibana",
+    "description": "Install Kibana Flag",
+    "default": "false",
+    "hidden": true,
+    "immutable": false,
+    "required": true,
+    "secured": false,
+    "type": "string",
+    "options": [
+      {
+        "value": "false",
+        "label": "False"
+      },
+      {
+          "value": "true",
+          "label": "True"
+      }
+    ],
+    "group_name": "icp_parameters"
+  },      
+  {
+    "name": "instance_prefix",
+    "label": "Hostname Prefix",
+    "description": "Type prefix to hostname",
+    "default": "icp",
+    "hidden": false,
+    "immutable": false,
+    "required": true,
+    "secured": false,
+    "type": "string",
+    "group_name": "image_parameters"
+  },
+  {
+    "name": "master",
+    "label": "Master Node",
+    "description": "Master Node Informations",
+    "default": {"nodes": "1", "name": "master", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"50","etcd_lv":"4","registry_lv":"35","management_lv":"100","memory":"8192","ipaddresses":"192.168.66.81","netmask":"21","gateway":"192.168.64.1" },
+    "hidden": false,
+    "immutable": false,
+    "required": true,
+    "secured": false,
+    "type": "map",
+    "group_name": "image_parameters"
   },
   {
       "name": "proxy",
       "label": "Proxy Node",
       "description": "Proxy Node Informations",
-      "default": {"nodes": "1", "name": "proxy", "cpu_cores": "2", "kubelet_lv":"10","docker_lv":"39","memory":"4096","ipaddresses":"192.168.64.204","netmask":"21","gateway":"192.168.64.1" },
+      "default": {"nodes": "1", "name": "proxy", "cpu_cores": "2", "kubelet_lv":"10","docker_lv":"39","memory":"4096","ipaddresses":"192.168.66.84","netmask":"21","gateway":"192.168.64.1" },
       "hidden": false,
       "immutable": false,
       "required": true,
       "secured": false,
-      "type": "map"
+      "type": "map",
+      "group_name": "image_parameters"
   },
   {
       "name": "management",
       "label": "Management Node",
       "description": "Management Node Informations",
-      "default": {"nodes": "1", "name": "mgmt", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"39","management_lv":"100","memory":"8192","ipaddresses":"192.168.64.205","netmask":"21","gateway":"192.168.64.1" },
+      "default": {"nodes": "1", "name": "mgmt", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"39","management_lv":"100","memory":"8192","ipaddresses":"192.168.66.87","netmask":"21","gateway":"192.168.64.1" },
       "hidden": false,
       "immutable": false,
       "required": true,
       "secured": false,
-      "type": "map"
+      "type": "map",
+      "group_name": "image_parameters"
   },
   {
     "name": "va",
     "label": "VA Node",
     "description": "VA Node Informations",
-    "default": {"nodes": "0", "name": "va", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"39","va_lv":"100","memory":"8192","ipaddresses":"192.168.66.89","netmask":"21","gateway":"192.168.64.1" },
+    "default": {"nodes": "1", "name": "va", "cpu_cores": "4", "kubelet_lv":"10","docker_lv":"39","va_lv":"100","memory":"8192","ipaddresses":"192.168.66.89","netmask":"21","gateway":"192.168.64.1" },
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "map"
+    "type": "map",
+    "group_name": "image_parameters"
   },  
   {
       "name": "worker",
       "label": "Worker Node",
       "description": "Worker Node Informations",
-      "default": {"nodes": "2", "name": "worker", "cpu_cores": "8", "kubelet_lv":"10","docker_lv":"89","memory":"8192","ipaddresses":"192.168.64.206 192.168.64.207","netmask":"21","gateway":"192.168.64.1" },
+      "default": {"nodes": "3", "name": "worker", "cpu_cores": "8", "kubelet_lv":"10","docker_lv":"89","memory":"8192","ipaddresses":"192.168.66.90 192.168.66.91 192.168.66.92","netmask":"21","gateway":"192.168.64.1" },
       "hidden": false,
       "immutable": false,
       "required": true,
       "secured": false,
-      "type": "map"
+      "type": "map",
+      "group_name": "image_parameters"
   },
   {
     "name": "gluster",
     "label": "Gluster Node",
     "description": "Gluster Node Informations",
-    "default": {"nodes": "1", "name": "gluster", "cpu_cores": "2", "data_disk":"100","memory":"2048","ipaddresses":"192.168.64.208","netmask":"21","gateway":"192.168.64.1" },
+    "default": {"nodes": "3", "name": "gluster", "cpu_cores": "2", "data_disk":"100","memory":"2048","ipaddresses":"192.168.66.95 192.168.66.96 192.168.66.97","netmask":"21","gateway":"192.168.64.1" },
     "hidden": false,
     "immutable": false,
     "required": true,
     "secured": false,
-    "type": "map"
+    "type": "map",
+    "group_name": "image_parameters"
   }  
-]
+],
+"template_output_params": []
+}
   
