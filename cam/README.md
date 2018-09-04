@@ -26,7 +26,7 @@ Before deploying ICP in your vSphere Cluster environment, verify the following c
   - GitHub Repository sub-directory: `cam`
 4. Click `Create` and `Save`
 5. Deploy the template
-=====================================================================================================
+
 ## Add/Remove Worker Nodes
 1. Open Deployed Instance in CAM
 2. Open `Modify` tab
